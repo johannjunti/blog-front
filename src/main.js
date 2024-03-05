@@ -1,5 +1,28 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import './style.css';
+import Buefy from '@ntohq/buefy-next';
+import '@ntohq/buefy-next/dist/buefy.css';
 
-createApp(App).mount('#app')
+import App from './App.vue';
+
+
+import Home from './pages/Home.vue';
+import ToDo from './pages/Todo.vue';
+
+const routes = [
+    { path: '/', component: Home },
+    { path: '/todo', component: ToDo },
+];
+
+const router = createRouter({
+    // 4. Provide the history implementation to use. We
+    // are using the hash history for simplicity here.
+    history: createWebHashHistory(),
+    routes, // short for `routes: routes`
+})
+  
+const app = createApp(App);
+app.use(router);
+app.use(Buefy);
+app.mount('#app');
